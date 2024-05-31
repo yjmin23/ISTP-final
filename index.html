@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECOMMENDATIONS BY MBTI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <style>
+        .search {
+            display: flex;
+            align-items: center;
+        }
+        .search input {
+            width: 148px;
+            height: 24px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 1px black solid;
+            margin-right: 10px;
+        }
+    
+        .search button {
+            font-size: 35px;
+            border: none;
+            background-color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            color: black;
+            cursor: pointer;
+        }
+        
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            position: relative;
+        }
+    
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: lighter;
+            text-align: center;
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    
+        .header-menu {
+            overflow: visible;
+            width: 1080px;
+            margin: 0 auto;
+            margin-bottom: 8px;  
+            display: flex;
+            justify-content: center;
+            text-align: center; 
+    
+        }
+            .outer-menu {
+            padding: 8px 0px;
+            display: inline-block;
+            margin-left: 125px;
+            margin-right: 125px;
+            margin-bottom: -1px;
+            text-align: center;
+            position: relative;
+            font-size: 18px;
+            z-index: 9999;
+            list-style-type: none;
+        }
+    
+        .outer-menu > a {
+            list-style-type: none;
+            margin-left: 10px;
+            line-height: 10px;
+            display: inline-block;
+            padding: 10px;
+        }
+    
+        .outer-menu > a:first-child {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 40px;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+        }
+        .outer-menu li > a {
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+      
+    
+        .outer-menu:hover a {
+            color: black; 
+        }
+    
+        .outer-menu:active a {
+            color: black;
+        }
+    
+        .inner-menu {
+            display: none;
+            background: #FFFFFF;
+            margin-top: 14px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            border-top: 1px solid #cccaca;
+            box-shadow: 0 2px 4px rgba(34, 25, 25, 0.5);
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+    
+        .inner-menu a {
+            display: block;
+            padding: 7px 15px;
+            z-index: 5000;
+            list-style-type: none;
+            line-height: 10px;
+            text-align: center; 
+            color: black;
+        }
+    
+        .inner-menu a:hover {
+            background-color: black;
+            color: white; 
+        }
+    
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    
+        div.section {
+            border: 1px solid black;
+            margin: 3px;
+            padding: 10px;
+        }
+    
+        a {
+            text-decoration: none;
+            color: darkgray;
+        }
+    
+        .header img {
+            margin-top: 4px;
+        }
+    
+        hr {
+            margin: 0;
+            padding: 0;
+        }
+    
+        .istp-write {
+            display: flex;
+            align-items: flex-start;
+            padding-left: 100px;
+            padding-bottom: -50px;
+    
+        }
+        .istp-img {
+            padding-left: 200px;
+            display: inline-block;
+    
+        }
+    
+        .istp-img p {
+            font-size: 25px;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .istp-img p > b {
+            font-size: 40px;
+        }
+        .istp-q {
+            padding-left: 180px;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+        .istp-q p:first-child {
+            color: darkblue;
+            font-weight: 700;
+        }
+        .istp-q p > b {
+            font-size: 20px;
+        }
+        .istp-q {
+            width: 950px; height: 400px;
+            border: none;
+            position: relative;
+            overflow-y: scroll;
+            scrollbar-width: none;
+    
+        }
+        .istp-img img {
+            height: 270px;
+        }
+        @media screen and (max-width: 767px) {
+            .header {
+                flex-direction: column;
+                padding: 80px;
+            }
+            .header h1 {
+                    margin-top: 80px;
+            }
+            .header-menu {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+            .outer-menu {
+                margin: 10px 0;
+                flex-direction: row;
+            }
+            .istp-write {
+                flex-direction: column;
+                align-items: center;
+                padding-left: 0;
+            }
+            .istp-img {
+                padding-left: 0;
+                text-align: center;
+            }
+            .istp-q {
+                padding-left: 20px;
+                width: 100%;
+                max-width: 90%;
+            }
+            .search {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 70px;
+            top: 20px;
+            }
+            .search input {
+            width: 148px;
+            height: 24px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 1px black solid;
+            margin: 0 auto;
+            display: block;
+            }
+    
+            .search button {
+            font-size: 35px;
+            border: none;
+            float: right;
+            background-color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            color: black;
+            cursor: pointer;
+            float: right;
+    
+            }
+            body { position: relative;}
+            .header img { 
+                    position: absolute;
+                    top: 30px;
+                    right: 20px;
+    
+                    
+            }
+            .inner-menu {
+                    position: absolute;
+                    left: 100%;
+                    transform: translateY(0);
+                    top: -10px;
+            }
+            
+        }
+    
+        @media screen and (min-width: 768px) and (max-width: 959px) {
+            .header {
+                flex-direction: column;
+                padding: 80px;
+            }
+            .header h1 {
+                    margin-top: 80px;
+            }
+            .header-menu {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+            .outer-menu {
+                margin: 10px 0;
+            }
+            .istp-write {
+                flex-direction: column;
+                align-items: center;
+                padding-left: 0;
+            }
+            .istp-img {
+                padding-left: 0;
+                text-align: center;
+            }
+            .istp-q {
+                padding-left: 20px;
+                width: 100%;
+                max-width: 80%;
+            }
+            .search {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 70px;
+            top: 20px;
+            }
+            .search input {
+            width: 148px;
+            height: 24px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 1px black solid;
+            margin: 0 auto;
+            display: block;
+            float: right;
+            }
+    
+            .search button {
+            font-size: 35px;
+            border: none;
+            background-color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            color: black;
+            cursor: pointer;
+            float: right;
+    
+            }
+            body { position: relative;}
+            .header img { 
+                    position: absolute;
+                    right: 20px;
+                    top: 30px;
+    
+                    
+            }
+            .inner-menu {
+                    position: absolute;
+                    left: 100%;
+                    transform: translateY(0);
+                    top: -10px
+            }
+            
+        }
+    </style>
+<script>
+        $(document).ready(function () {
+            $('.outer-menu').hover(function () {
+                $(this).find('.inner-menu').css('display', 'block');
+            }, function () {
+                $(this).find('.inner-menu').css('display', 'none');
+            });
+        });
+</script>
+</head>
+
+
+
+<body>
+    <div class="header">
+        <h1>RECOMMENDATIONS BY <b>MBTI</b> TYPE</h1>
+        <form action="https://search.naver.com/search.naver" style="margin-left: auto;">
+            <div class="search">
+                <input type="text" name="query" value="">
+                <button type="submit">⌕</button>
+            </div>
+        </form>
+        &nbsp;&nbsp;&nbsp;
+        <a href="https://wulwu.github.io/qnaafter/">
+            <img src="https://cdn-icons-png.flaticon.com/512/2608/2608207.png" alt="Q&A" width="30">
+        </a>
+        &nbsp;&nbsp;
+    </div>
+
+    <br>
+    <hr>
+
+    <div class="header-menu">
+        <ul class="outer-menu">
+            <li>
+                <a href="#">ES</a>
+                <ul class="inner-menu">
+                    <li><a href="https://wulwu.github.io/estp/">ESTP</a></li>
+                    <li><a href="https://wulwu.github.io/estj/">ESTJ</a></li>
+                    <li><a href="https://wulwu.github.io/esfp/">ESFP</a></li>
+                    <li><a href="https://wulwu.github.io/esfj/">ESFJ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="outer-menu">
+            <li>
+                <a href="#">EN</a>
+                <ul class="inner-menu">
+                    <li><a href="https://wulwu.github.io/entp/">ENTP</a></li>
+                    <li><a href="https://wulwu.github.io/entj/">ENTJ</a></li>
+                    <li><a href="https://wulwu.github.io/enfp_last/">ENFP</a></li>
+                    <li><a href="https://wulwu.github.io/enfj/">ENFJ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="outer-menu">
+            <li>
+                <a href="#">IS</a>
+                <ul class="inner-menu">
+                    <li><a href="https://wulwu.github.io/istp/">ISTP</a></li>
+                    <li><a href="https://wulwu.github.io/istj/">ISTJ</a></li>
+                    <li><a href="https://wulwu.github.io/isfp/">ISFP</a></li>
+                    <li><a href="https://wulwu.github.io/isfj/">ISFJ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="outer-menu">
+            <li>
+                <a href="#">IN</a>
+                <ul class="inner-menu">
+                    <li><a href="https://wulwu.github.io/intp/">INTP</a></li>
+                    <li><a href="https://wulwu.github.io/intj/">INTJ</a></li>
+                    <li><a href="https://wulwu.github.io/infp/">INFP</a></li>
+                    <li><a href="https://wulwu.github.io/infj/">INFJ</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <div class="istp-write">
+        <div class="istp-img">  
+            <p><b>장인</b></p>
+            <p>성격유형: ISTP</p><br><br>
+            <img src="https://i.pinimg.com/474x/53/33/32/533332eb28b771dc09e975d79baba988.jpg" width="250">
+        </div>
+        <div class="istp-q">
+            <p>대담하면서도 현실적인 성격으로, 모든 종류의 도구를 자유자재로 다루는 장인</p>
+            <br><br>
+            <p><b>ISTP 특징</b></p><br>
+            <p>- 일반적으로 조용한 편이나 필요에 따라 사교적이다. </p>
+            <p>- 어딜 가나 적응력이 빠르다.</p>
+            <p>- 마음에 없는 얘기를 상대방 기분 때문에 하지는 않는다. </p>
+            <p>- 주기능은 Ti(내향 사고)로 분석적이고 논리적이다.</p>
+            <p>- 틀에 박힌 생활과 관습적인 것을 싫어한다.</p>
+            <p>- 타인의 일에 무관심한 편이지만, 대인 관계는 의외로 원만하다.  </p>
+            <p>- 노력을 절약하면서 일의 능률을 높인다. </p>
+            <p>- 스스로를 소위 '극T'라고 소개할 수 있다. I치고는 인맥이 넓고, S치고 미래 지향적인 성향이 부족한 편은 아니며, P치고 계획 자체는 잘 짜는 편이지만, T 중에서는 감정적인 편에는 결코 속하지 않는다.</p>
+            <p>- 혼자만의 시간이 필요하며, 자유를 매우 중요하게 여긴다. 연인이나 배우자가 자신의 삶을 통제하려고 하면 거리를 둔다.</p>
+            <p>- 관심 분야가 아니면 쳐다보지도 않는다. </p><br><br>
+            <br><br>
+        </div>
+    </div>
+</body>
+</html>
